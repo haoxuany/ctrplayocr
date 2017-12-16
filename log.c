@@ -52,6 +52,7 @@ int min(int a, int b) { return a < b ? a : b; }
 
 // haoxuany - this has the potential to be slow
 // but shouldn't be critical enough to cause a problem
+// FIXME: this needs to be threadsafe due to use of log_buffer
 void log_vwrap(
 		const char * const filename,
 		const int line,
@@ -67,13 +68,12 @@ void log_vwrap(
 	copy_len = strftime(buffer, len, "%X - ", localtime(&now));
 	len -= copy_len; buffer += copy_len;
 
-	copy_len = min(strlen(filename), len - 1);
-	memcpy(buffer, filename, copy_len);
-	len -= copy_len; buffer += copy_len;
-
-	snprintf(buffer, len, ":%d: ", line);
-	copy_len = strlen(buffer);
-	len -= copy_len; buffer += copy_len;
+	if (filename)
+	{
+		snprintf(buffer, len, "%s:%d: ", filename, line);
+		copy_len = strlen(buffer);
+		len -= copy_len; buffer += copy_len;
+	}
 
 	vsnprintf(buffer, len, format, args);
 

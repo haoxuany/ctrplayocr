@@ -9,7 +9,8 @@ CFLAGS += $(SDLCFLAGS)
 LDFLAGS += $(SDLLDFLAGS) $(FFLDFLAGS)
 BIN = player
 
-OBJS = log.o main.o
+LOGGING = log.o log_external.o
+OBJS = $(LOGGING) main.o
 
 all: $(OBJS)
 	$(CC) -o $(BIN) $^ $(LDFLAGS)
