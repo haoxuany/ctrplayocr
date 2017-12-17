@@ -1,19 +1,19 @@
 extern "C"
 {
 #include "log.h"
-#include "log_ffmpeg.h"
 }
-#include "log_qt.h"
+#include "log_external.h"
 
 #include <QApplication>
 
 
 int main(int argc, char *argv[])
 {
-	log_connect_ffmpeg_to_log();
-	log_connect_qt_to_log();
+	log_pipe_external();
 
 	QApplication app(argc, argv);
+
+	log_pipe_to_window();
 
 	return app.exec();
 }

@@ -22,12 +22,14 @@ QT += widgets
 # qmake syntax is a piece of shit and passing makefile variables
 # don't actually work, so write everything manually
 SOURCES += \
-  ../log.c \
-  ../log_ffmpeg.c
+  ../log/log.c \
+  ../log/log_ffmpeg.c \
+  ../log/log_qt.cpp \
+  ../log/log_external.cpp \
+
 SOURCES += \
-  log_qt.cpp \
   main.cpp
-INCLUDEPATH += . ../
+INCLUDEPATH += . ../ ../log
 QMAKE_CFLAGS += $$(LOCAL_CFLAGS)
 QMAKE_CXXFLAGS += $$(LOCAL_CFLAGS)
 LIBS += $(LOCAL_LDFLAGS)
