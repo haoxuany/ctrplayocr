@@ -23,7 +23,9 @@ QT += widgets
 # don't actually work, so write everything manually
 SOURCES += \
   ../log.c \
-  ../log_external.c \
+  ../log_ffmpeg.c
+SOURCES += \
+  log_qt.cpp \
   main.cpp
 INCLUDEPATH += . ../
 QMAKE_CFLAGS += $$(LOCAL_CFLAGS)

@@ -1,6 +1,6 @@
 #include "config.h"
 #include "log.h"
-#include "log_external.h"
+#include "log_ffmpeg.h"
 
 #include <stdio.h>
 #include <stdarg.h>
