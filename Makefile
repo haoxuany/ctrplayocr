@@ -1,19 +1,21 @@
 
-SDLCFLAGS = `pkg-config --cflags sdl2`
-SDLLDFLAGS = `pkg-config --libs sdl2`
+FFLIBS = libavcodec libavformat libavutil libavdevice libswscale
+FFCFLAGS = `pkg-config --cflags $(FFLIBS)`
+FFLDFLAGS = `pkg-config --libs $(FFLIBS)`
 
-# lol ideally this should be done with pkg-config, but not on a mac
-FFLDFLAGS = -lavutil -lavformat -lavcodec -lavdevice -lswscale -lz -lm
+LOCAL_CFLAGS += $(CFLAGS) $(FFCFLAGS)
+LOCAL_LDFLAGS += $(LDFLAGS) $(FFLDFLAGS)
 
-CFLAGS += $(SDLCFLAGS)
-LDFLAGS += $(SDLLDFLAGS) $(FFLDFLAGS)
-BIN = player
+export
 
-LOGGING = log.o log_external.o
-OBJS = $(LOGGING) main.o
+all:
+	cd ui/ && \
+		qmake && \
+		make
 
-all: $(OBJS)
-	$(CC) -o $(BIN) $^ $(LDFLAGS)
+# this is mac specific, probably want to fix this
+debug:
+	./player.app/Contents/MacOS/player
 
 clean:
-	rm -rf $(BIN) *.o
+	cd ui/ && make clean
