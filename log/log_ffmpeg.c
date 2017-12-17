@@ -49,7 +49,7 @@ void ffmpeg_to_log(void *avcl, int level, const char *fmt, va_list vl)
 			break;
 	}
 
-	log_vwrap(NULL, -1, lv, fmt, vl);
+	log_vwrap(NULL, -1, NULL, lv, fmt, vl);
 }
 
 void log_connect_ffmpeg_to_log() { av_log_set_callback(ffmpeg_to_log); }

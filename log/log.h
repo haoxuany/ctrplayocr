@@ -3,27 +3,27 @@
 
 // macros to actually use
 #define log_d(format, ...) \
-	(log_wrap(__FILE__, __LINE__, \
+	(log_wrap(__FILE__, __LINE__, __func__, \
 			log_level_debug, \
 			format, ##__VA_ARGS__))
 
 #define log_i(format, ...) \
-	(log_wrap(__FILE__, __LINE__, \
+	(log_wrap(__FILE__, __LINE__, __func__, \
 			log_level_info, \
 			format, ##__VA_ARGS__))
 
 #define log_w(format, ...) \
-	(log_wrap(__FILE__, __LINE__, \
+	(log_wrap(__FILE__, __LINE__, __func__, \
 			log_level_warning, \
 			format, ##__VA_ARGS__))
 
 #define log_e(format, ...) \
-	(log_wrap(__FILE__, __LINE__, \
+	(log_wrap(__FILE__, __LINE__, __func__, \
 			log_level_error, \
 			format, ##__VA_ARGS__))
 
 #define log_f(format, ...) \
-	(log_wrap(__FILE__, __LINE__, \
+	(log_wrap(__FILE__, __LINE__, __func__, \
 			log_level_fatal, \
 			format, ##__VA_ARGS__))
 
@@ -46,6 +46,7 @@ void log_set(logger l);
 void log_wrap(
 		const char * const filename,
 		const int line,
+		const char * const func,
 		const log_level level,
 		const char *format,
 		...);
@@ -53,6 +54,7 @@ void log_wrap(
 void log_vwrap(
 		const char * const filename,
 		const int line,
+		const char * const func,
 		const log_level level,
 		const char *format,
 		va_list args);

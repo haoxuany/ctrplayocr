@@ -56,6 +56,7 @@ int min(int a, int b) { return a < b ? a : b; }
 void log_vwrap(
 		const char * const filename,
 		const int line,
+		const char * const func,
 		const log_level level,
 		const char *format,
 		va_list args)
@@ -70,7 +71,7 @@ void log_vwrap(
 
 	if (filename)
 	{
-		snprintf(buffer, len, "%s:%d: ", filename, line);
+		snprintf(buffer, len, "%s:%d:%s(): ", filename, line, func);
 		copy_len = strlen(buffer);
 		len -= copy_len; buffer += copy_len;
 	}
@@ -83,12 +84,13 @@ void log_vwrap(
 void log_wrap(
 		const char * const filename,
 		const int line,
+		const char * const func,
 		const log_level level,
 		const char * format,
 		...)
 {
 	va_list args;
 	va_start(args, format);
-	log_vwrap(filename, line, level, format, args);
+	log_vwrap(filename, line, func, level, format, args);
 	va_end(args);
 }

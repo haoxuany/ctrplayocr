@@ -42,7 +42,8 @@ void qt_to_log(QtMsgType type,
 	}
 
 	QByteArray ba = msg.toLocal8Bit();
-	log_wrap(context.file, context.line, lv, "%s", ba.data());
+	log_wrap(context.file, context.line, context.function,
+			lv, "%s", ba.data());
 }
 
 void log_connect_qt_to_log() { qInstallMessageHandler(qt_to_log); }
@@ -89,6 +90,7 @@ void log_connect_log_to_debug_window()
 	}
 
 	log_list = new QListWidget(NULL);
+	log_list->setWordWrap(true);
 	log_list->show();
 
 	log_set(qt_logger);
