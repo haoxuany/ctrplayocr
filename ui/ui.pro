@@ -33,4 +33,5 @@ QMAKE_CXXFLAGS += $$(LOCAL_CFLAGS)
 LIBS += $(LOCAL_LDFLAGS)
 
 # Output
-DESTDIR = ../
+OBJECTS_DIR = ../build
+DESTDIR = ../bin
